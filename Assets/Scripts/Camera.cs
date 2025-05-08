@@ -30,4 +30,9 @@ public class Camera : MonoBehaviour
 
         transform.LookAt(player);
     }
+
+    public float GetCameraYRotation()
+    {
+        return _yRotation;
+    }
 }

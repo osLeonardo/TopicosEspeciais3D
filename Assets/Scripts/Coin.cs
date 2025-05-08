@@ -13,4 +13,13 @@ public class Coin : MonoBehaviour
 
         transform.Rotate(Vector3.left, _rotationSpeed * Time.deltaTime);
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            Debug.Log("Coin collected!");
+            Destroy(gameObject);
+        }
+    }
 }

@@ -4,6 +4,9 @@ public class Player : MonoBehaviour
 {
     public float speed = 5f;
     public float jumpForce = 5f;
+    public Camera cameraScript;
+
+    private bool _isOnGround;
     private Rigidbody _rb;
 
     void Start()
@@ -16,16 +19,16 @@ public class Player : MonoBehaviour
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
         
-        transform.Translate(GetMovement(x), 0, GetMovement(z));
+        float cameraYRotation = cameraScript.GetCameraYRotation();
+        transform.rotation = Quaternion.Euler(0, cameraYRotation, 0);
+
+        Vector3 movement = transform.forward * z + transform.right * x;
+        transform.Translate(movement * (speed * Time.deltaTime), Space.World);
         
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Jump();
         }
-        
-        /*float mouse = Input.GetAxis("Mouse X");
-        float coeficient = 0.1f;
-        transform.Rotate(0, mouse * coeficient, 0);*/
     }
 
     private float GetMovement(float input)
@@ -35,13 +38,25 @@ public class Player : MonoBehaviour
 
     private void Jump()
     {
-        if (_rb)
+        if (_rb && _isOnGround)
         {
             _rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
-        else
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
         {
-            Debug.LogWarning("Rigidbody component not found on the player object.");
+            _isOnGround = true;
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            _isOnGround = false;
         }
     }
 }
