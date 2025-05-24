@@ -17,9 +17,11 @@ public class ZombieSpawner : MonoBehaviour
     private float _roundTimer = 0f;
     private bool _waitingForNextRound = false;
     private Queue<int> _spawnQueue = new();
+    private GameController _gameController;
 
     void Start()
     {
+        _gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         StartRound();
     }
 
@@ -44,14 +46,12 @@ public class ZombieSpawner : MonoBehaviour
 
     void StartRound()
     {
-        if (_currentRound == 1)
+        if (_gameController)
         {
-            _zombiesToSpawn = startZombies;
+            _gameController.UpdateRound(_currentRound);
         }
-        else
-        {
-            _zombiesToSpawn = Mathf.CeilToInt(_zombiesToSpawn + _zombiesToSpawn / 2f);
-        }
+
+        _zombiesToSpawn = _currentRound == 1 ? startZombies : Mathf.CeilToInt(_zombiesToSpawn + _zombiesToSpawn / 2f);
         _spawning = true;
         _spawnQueue.Clear();
         for (int i = 0; i < _zombiesToSpawn; i++)

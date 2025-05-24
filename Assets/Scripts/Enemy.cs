@@ -27,16 +27,16 @@ public class Enemy : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             _gameController.playerLife--;
-
             if (_gameController.playerLife <= 0)
             {
+                _gameController.KillPlayer();
                 Debug.LogWarning("Morreu");
             }
             else
             {
+                _gameController.UpdateLife(_gameController.playerLife);
                 Rigidbody rb = collision.gameObject.GetComponent<Rigidbody>();
                 rb.AddForce(0, pushForce, 0, ForceMode.Impulse);
-                
             }
         }
     }

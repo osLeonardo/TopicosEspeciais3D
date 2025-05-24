@@ -1210,9 +1210,9 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1333616586}
-  - {fileID: 491219933}
-  - {fileID: 555666007}
   - {fileID: 1305436117}
+  - {fileID: 555666007}
+  - {fileID: 491219933}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1270,6 +1270,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerLife: 3
+  lifeCounter: {fileID: 1305436118}
+  ammoCounter: {fileID: 555666008}
+  roundCounter: {fileID: 491219934}
 --- !u!114 &1673151588
 MonoBehaviour:
   m_ObjectHideFlags: 0

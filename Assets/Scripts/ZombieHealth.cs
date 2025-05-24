@@ -16,7 +16,7 @@ public class ZombieHealth : MonoBehaviour
 
     void Awake()
     {
-        var spawner = FindObjectOfType<ZombieSpawner>();
+        var spawner = FindFirstObjectByType<ZombieSpawner>();
         int round = spawner != null ? spawner.GetCurrentRound() : 1;
         float multiplier = Mathf.Pow(1.05f, round - 1);
         _currentHealth = Mathf.Ceil(baseHealth * multiplier);
@@ -43,7 +43,7 @@ public class ZombieHealth : MonoBehaviour
     void Die()
     {
         Destroy(gameObject);
-        var spawner = FindObjectOfType<ZombieSpawner>();
+        var spawner = FindFirstObjectByType<ZombieSpawner>();
         if (spawner)
         {
             spawner.OnZombieKilled();

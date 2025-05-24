@@ -15,14 +15,11 @@ public class CameraScript : MonoBehaviour
 
     void Update()
     {
+        if (!player) return;
         float mouseX = Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;
 
-        if (player)
-        {
-            player.Rotate(Vector3.up * mouseX, Space.World);
-        }
-
+        player.Rotate(Vector3.up * mouseX, Space.World);
         _xRotation -= mouseY;
         _xRotation = Mathf.Clamp(_xRotation, -85f, 85f);
         transform.localRotation = Quaternion.Euler(_xRotation, 0f, 0f);
