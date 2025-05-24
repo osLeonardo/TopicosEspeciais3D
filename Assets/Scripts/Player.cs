@@ -1,10 +1,11 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Player : MonoBehaviour
 {
     public float speed = 5f;
     public float jumpForce = 5f;
-    public Camera cameraScript;
+    public CameraScript cameraScriptScript;
 
     private bool _isOnGround;
     private Rigidbody _rb;
@@ -19,7 +20,7 @@ public class Player : MonoBehaviour
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
         
-        float cameraYRotation = cameraScript.GetCameraYRotation();
+        float cameraYRotation = cameraScriptScript.GetCameraYRotation();
         transform.rotation = Quaternion.Euler(0, cameraYRotation, 0);
 
         Vector3 movement = transform.forward * z + transform.right * x;

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 535992815201974412}
   - component: {fileID: 1750329962614316594}
   - component: {fileID: 5474925807914933224}
+  - component: {fileID: -7168265319321877583}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -149,6 +150,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcb3fd1e43b742fc8e9762e423959cdb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   speed: 0.5
   pushForce: 5
+--- !u!114 &-7168265319321877583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6127886661786313512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b7de0d27a101354ca50592fdb106705, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseHealth: 75
+  headshotMultiplier: 3
