@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class ZombieHealth : MonoBehaviour
@@ -6,6 +7,12 @@ public class ZombieHealth : MonoBehaviour
     public float headshotMultiplier = 3f;
 
     private float _currentHealth;
+    private Rigidbody _rb;
+
+    private void Start()
+    {
+        _rb = GetComponent<Rigidbody>();
+    }
 
     void Awake()
     {
@@ -27,10 +34,9 @@ public class ZombieHealth : MonoBehaviour
 
     public void ApplyKnockback(Vector3 direction, float force)
     {
-        Rigidbody rb = GetComponent<Rigidbody>();
-        if (rb != null)
+        if (_rb)
         {
-            rb.AddForce(direction * force, ForceMode.Impulse);
+            _rb.AddForce(direction * force, ForceMode.Impulse);
         }
     }
 
@@ -38,8 +44,10 @@ public class ZombieHealth : MonoBehaviour
     {
         Destroy(gameObject);
         var spawner = FindObjectOfType<ZombieSpawner>();
-        if (spawner != null)
+        if (spawner)
+        {
             spawner.OnZombieKilled();
+        }
     }
 }
 
