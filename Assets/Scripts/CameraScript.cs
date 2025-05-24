@@ -6,6 +6,7 @@ public class CameraScript : MonoBehaviour
     public float sensitivity = 100f;
 
     private float _xRotation = 0f;
+    private float _yRotation = 0f;
 
     private void Start()
     {
@@ -19,9 +20,9 @@ public class CameraScript : MonoBehaviour
         float mouseX = Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;
 
-        player.Rotate(Vector3.up * mouseX, Space.World);
-        _xRotation -= mouseY;
-        _xRotation = Mathf.Clamp(_xRotation, -85f, 85f);
+        _yRotation += mouseX;
+        _xRotation = Mathf.Clamp(_xRotation - mouseY, -85f, 85f);
+        player.localRotation = Quaternion.Euler(0f, _yRotation, 0f);
         transform.localRotation = Quaternion.Euler(_xRotation, 0f, 0f);
     }
 }
