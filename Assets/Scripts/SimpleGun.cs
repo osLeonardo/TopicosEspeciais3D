@@ -8,10 +8,14 @@ public class SimpleGun : MonoBehaviour
     public LayerMask hitMask;
     public Transform firePoint;
     public float knockbackForce = 10f;
+    public Animator animator;
+
+    private static readonly int ShootTrigger = Animator.StringToHash("Shoot");
+    private bool _canShoot = true;
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && _canShoot)
         {
             Shoot();
         }
@@ -19,6 +23,8 @@ public class SimpleGun : MonoBehaviour
 
     void Shoot()
     {
+        _canShoot = false;
+        animator.SetTrigger(ShootTrigger);
         Ray ray = fpsCam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, range, hitMask))
@@ -31,5 +37,9 @@ public class SimpleGun : MonoBehaviour
             }
         }
     }
-}
 
+    public void OnShootAnimationEnd()
+    {
+        _canShoot = true;
+    }
+}

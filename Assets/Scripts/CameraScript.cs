@@ -6,7 +6,6 @@ public class CameraScript : MonoBehaviour
     public float sensitivity = 100f;
 
     private float _xRotation = 0f;
-    private float _yRotation = 0f;
 
     void Start()
     {
