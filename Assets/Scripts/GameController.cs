@@ -5,14 +5,13 @@ using UnityEngine.Serialization;
 
 public class GameController : MonoBehaviour
 {
-    public bool isPlayerAlive = true;
     public int playerLife = 3;
     public int maxLife = 3;
     public TextMeshProUGUI lifeCounter;
     public TextMeshProUGUI ammoCounter;
     public TextMeshProUGUI roundCounter;
 
-    void Update()
+    private void Update()
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
@@ -38,9 +37,9 @@ public class GameController : MonoBehaviour
 
     public void KillPlayer()
     {
-        isPlayerAlive = false;
         playerLife = 0;
         UpdateLife(playerLife);
+        Debug.LogWarning("Morreu");
     }
 
     public void UpdateLife(int life)

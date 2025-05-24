@@ -14,7 +14,7 @@ public class ZombieHealth : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
     }
 
-    void Awake()
+    private void Awake()
     {
         var spawner = FindFirstObjectByType<ZombieSpawner>();
         int round = spawner != null ? spawner.GetCurrentRound() : 1;
@@ -40,7 +40,7 @@ public class ZombieHealth : MonoBehaviour
         }
     }
 
-    void Die()
+    private void Die()
     {
         Destroy(gameObject);
         var spawner = FindFirstObjectByType<ZombieSpawner>();

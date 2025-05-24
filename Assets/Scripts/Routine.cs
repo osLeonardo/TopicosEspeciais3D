@@ -6,10 +6,6 @@ public class Routine : MonoBehaviour
 {
     private IEnumerator _coroutine;
 
-    void Start() { }
-
-    void Update() { }
-
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Player"))

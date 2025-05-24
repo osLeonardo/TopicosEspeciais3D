@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class SimpleGun : MonoBehaviour
 {
+    public Camera fpsCam;
+    public Transform firePoint;
+    public Animator animator;
+    public LayerMask hitMask;
     public float knockbackForce = 10f;
     public float damage = 25f;
     public float range = 100f;
-    public Camera fpsCam;
-    public LayerMask hitMask;
-    public Transform firePoint;
-    public Animator animator;
     public int maxClipSize = 10;
     public int maxReserveAmmo = 20;
 
@@ -19,7 +19,7 @@ public class SimpleGun : MonoBehaviour
     private static readonly int ShootTrigger = Animator.StringToHash("Shoot");
     private bool _canShoot = true;
 
-    void Start()
+    private void Start()
     {
         _gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         _currentAmmo = maxClipSize;
@@ -27,7 +27,7 @@ public class SimpleGun : MonoBehaviour
         _gameController.UpdateAmmo(_currentAmmo, _reserveAmmo);
     }
 
-    void Update()
+    private void Update()
     {
         if (Input.GetMouseButtonDown(0) && _canShoot)
         {
@@ -39,7 +39,7 @@ public class SimpleGun : MonoBehaviour
         }
     }
 
-    void Shoot()
+    private void Shoot()
     {
         if (_currentAmmo <= 0) return;
         _currentAmmo--;
@@ -59,7 +59,7 @@ public class SimpleGun : MonoBehaviour
         }
     }
 
-    void Reload()
+    private void Reload()
     {
         int needed = maxClipSize - _currentAmmo;
         if (needed > 0 && _reserveAmmo > 0)

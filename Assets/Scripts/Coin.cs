@@ -2,11 +2,9 @@ using UnityEngine;
 
 public class Coin : MonoBehaviour
 {
-    private float _rotationSpeed = 500f;
+    private readonly float _rotationSpeed = 500f;
 
-    void Start() { }
-
-    void Update()
+    private void Update()
     {
         float y = Mathf.Abs(Mathf.Sin(Time.time)) * 0.25f;
         transform.position = new Vector3(transform.position.x, y + 0.5f, transform.position.z);

@@ -19,13 +19,13 @@ public class ZombieSpawner : MonoBehaviour
     private Queue<int> _spawnQueue = new();
     private GameController _gameController;
 
-    void Start()
+    private void Start()
     {
         _gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         StartRound();
     }
 
-    void Update()
+    private void Update()
     {
         if (_zombiesAlive == 0 && !_spawning && !_waitingForNextRound)
         {
@@ -44,7 +44,7 @@ public class ZombieSpawner : MonoBehaviour
         }
     }
 
-    void StartRound()
+    private void StartRound()
     {
         if (_gameController)
         {
@@ -61,7 +61,7 @@ public class ZombieSpawner : MonoBehaviour
         StartCoroutine(SpawnZombies());
     }
 
-    System.Collections.IEnumerator SpawnZombies()
+    private System.Collections.IEnumerator SpawnZombies()
     {
         while (_spawnQueue.Count > 0)
         {
@@ -79,7 +79,7 @@ public class ZombieSpawner : MonoBehaviour
         _spawning = false;
     }
 
-    void SpawnZombie()
+    private void SpawnZombie()
     {
         int idx = Random.Range(0, spawnPoints.Count);
         Instantiate(zombiePrefab, spawnPoints[idx].position, Quaternion.identity);

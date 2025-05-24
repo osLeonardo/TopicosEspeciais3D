@@ -7,13 +7,13 @@ public class CameraScript : MonoBehaviour
 
     private float _xRotation = 0f;
 
-    void Start()
+    private void Start()
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    void Update()
+    private void Update()
     {
         if (!player) return;
         float mouseX = Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;

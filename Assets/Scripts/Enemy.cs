@@ -2,19 +2,20 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    public float speed = 0.5f;
+    public float attackCooldown = 1.0f;
+    private float _lastAttackTime = -999f;
+
     private GameController _gameController;
     private GameObject _player;
 
-    public float speed = 0.5f;
-    public float pushForce = 5f;
-
-    void Start()
+    private void Start()
     {
         _gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         _player = GameObject.FindGameObjectWithTag("Player");
     }
 
-    void Update()
+    private void Update()
     {
         var playerPosition = _player.transform.position;
 
@@ -26,17 +27,18 @@ public class Enemy : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            _gameController.playerLife--;
-            if (_gameController.playerLife <= 0)
+            if (Time.time - _lastAttackTime >= attackCooldown)
             {
-                _gameController.KillPlayer();
-                Debug.LogWarning("Morreu");
-            }
-            else
-            {
-                _gameController.UpdateLife(_gameController.playerLife);
-                Rigidbody rb = collision.gameObject.GetComponent<Rigidbody>();
-                rb.AddForce(0, pushForce, 0, ForceMode.Impulse);
+                _gameController.playerLife--;
+                _lastAttackTime = Time.time;
+                if (_gameController.playerLife <= 0)
+                {
+                    _gameController.KillPlayer();
+                }
+                else
+                {
+                    _gameController.UpdateLife(_gameController.playerLife);
+                }
             }
         }
     }
