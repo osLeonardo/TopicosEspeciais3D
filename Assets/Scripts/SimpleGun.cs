@@ -50,10 +50,11 @@ public class SimpleGun : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, range, hitMask))
         {
-            var zombie = hit.collider.GetComponent<ZombieHealth>();
+            var zombie = hit.collider.GetComponentInParent<ZombieHealth>();
             if (zombie)
             {
-                zombie.TakeDamage(damage);
+                bool isHeadshot = hit.collider.CompareTag("ZombieHead");
+                zombie.TakeDamage(damage, isHeadshot);
                 zombie.ApplyKnockback((hit.point - firePoint.position).normalized, knockbackForce);
             }
         }
