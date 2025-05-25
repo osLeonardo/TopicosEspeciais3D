@@ -1,19 +1,21 @@
-using System;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class GameController : MonoBehaviour
 {
     public int playerLife = 3;
     public int maxLife = 3;
+    public int currentRound = 1;
     public TextMeshProUGUI lifeCounter;
     public TextMeshProUGUI ammoCounter;
     public TextMeshProUGUI roundCounter;
-    public static GameController Instance { get; private set; }
+    public DeathSequence deathSequence;
     public AudioSource doubleAudioSource;
     public AudioSource regenAudioSource;
     public AudioSource roundStartAudioSource;
+    
+    public static GameController Instance { get; private set; }
+    public static int LastRound { get; private set; }
 
     public void DoubleMaxLife()
     {
@@ -31,9 +33,10 @@ public class GameController : MonoBehaviour
 
     public void KillPlayer()
     {
+        LastRound = currentRound;
         playerLife = 0;
         UpdateLife(playerLife);
-        Debug.LogWarning("Morreu");
+        deathSequence.StartDeathSequence();
     }
 
     public void UpdateLife(int life)
@@ -48,17 +51,20 @@ public class GameController : MonoBehaviour
 
     public void UpdateRound(int round)
     {
+        currentRound = round;
         roundStartAudioSource.Play();
         roundCounter.text = $"Round {round}";
     }
+
     private void Awake()
     {
         if (Instance == null)
+        {
             Instance = this;
+        }
         else
         {
             Destroy(gameObject);
-            return;
         }
     }
 }
