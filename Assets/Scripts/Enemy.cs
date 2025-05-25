@@ -5,6 +5,7 @@ public class Enemy : MonoBehaviour
 {
     public float speed = 2f;
     public float attackCooldown = 1.0f;
+    public AudioSource audioSource;
 
     private float _lastAttackTime = -999f;
     private NavMeshAgent _navMeshAgent;
@@ -30,6 +31,7 @@ public class Enemy : MonoBehaviour
         {
             if (Time.time - _lastAttackTime >= attackCooldown)
             {
+                audioSource.Play();
                 _gameController.playerLife--;
                 _lastAttackTime = Time.time;
                 if (_gameController.playerLife <= 0)
