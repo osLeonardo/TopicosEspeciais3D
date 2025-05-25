@@ -6176,7 +6176,7 @@ MonoBehaviour:
   ammoCounter: {fileID: 555666008}
   roundCounter: {fileID: 491219934}
   deathSequence: {fileID: 1673151592}
-  upgradeAudioSource: {fileID: 0}
+  upgradeAudioSource: {fileID: 1673151589}
   regenAudioSource: {fileID: 1673151591}
   roundStartAudioSource: {fileID: 1673151590}
 --- !u!114 &1673151588
