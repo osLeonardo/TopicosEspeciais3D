@@ -5,8 +5,8 @@ public class Enemy : MonoBehaviour
 {
     public float speed = 2f;
     public float attackCooldown = 1.0f;
-    private float _lastAttackTime = -999f;
 
+    private float _lastAttackTime = -999f;
     private NavMeshAgent _navMeshAgent;
     private GameController _gameController;
     private GameObject _player;
@@ -21,11 +21,7 @@ public class Enemy : MonoBehaviour
     private void Update()
     {
         var playerPosition = _player.transform.position;
-
         _navMeshAgent.SetDestination(playerPosition);
-
-        // transform.position = Vector3.MoveTowards(transform.position, playerPosition, speed * Time.deltaTime);
-        // transform.LookAt(playerPosition);
     }
 
     private void OnCollisionEnter(Collision collision)

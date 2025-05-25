@@ -1,11 +1,12 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class ZombieHealth : MonoBehaviour
 {
     public float baseHealth = 75f;
-    public float headshotMultiplier = 3f;
 
+    private readonly int _headshotMultiplier = 10;
     private float _currentHealth;
     private Rigidbody _rb;
 
@@ -24,7 +25,7 @@ public class ZombieHealth : MonoBehaviour
 
     public void TakeDamage(float amount, bool isHeadshot = false)
     {
-        float finalDamage = isHeadshot ? amount * headshotMultiplier : amount;
+        float finalDamage = isHeadshot ? amount * _headshotMultiplier : amount;
         _currentHealth -= finalDamage;
         if (_currentHealth <= 0f)
         {
