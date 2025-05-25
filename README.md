@@ -1,51 +1,47 @@
-# Tópicos Especiais 3D
+# Tópicos Especiais 3D - Zombie Survival Game
 
-This project is a 3D game developed using Unity. It includes various assets, scripts, and features to create a platformer-style game. Below, you will find details about the assets, their licenses, and contributors.
+This project is a 3D zombie survival game developed in Unity as part of the Tópicos Especiais course. The objective is to survive as many rounds as possible against waves of zombies, using your skills and strategy to stay alive.
 
 ---
 
-## **Assets**
+## **Gameplay Features**
 
-All assets in the pack have been repackaged, and many have been modified by Brackeys.
+- **Wave-based Zombie Spawning:** Survive increasingly difficult rounds as more zombies spawn each wave.
+- **Dynamic Spawner System:** Zombies spawn at random points, with the number of zombies and difficulty increasing each round.
+- **Player Health and Death:** The player has a health system and can die if overwhelmed by zombies.
+- **Score and Rounds:** Track your current round and performance as you progress.
+- **Multiple Spawn Points:** Zombies appear from various locations to challenge the player.
+- **Expandable Mechanics:** The project is structured for easy addition of new features, such as weapons, power-ups, or new enemy types.
 
-### **Credits**
+---
 
-#### **Sprites**
-- **Knight**: [analogStudios_](https://analogstudios.itch.io/camelot)
-- **Slime**: [analogStudios_](https://analogstudios.itch.io/dungeonsprites)
-- **Platforms and Coin**: [analogStudios_](https://analogstudios.itch.io/four-seasons-platformer-sprites)
-- **World Tileset and Fruit**: [RottingPixels](https://rottingpixels.itch.io/four-seasons-platformer-tileset-16x16free)
+## **How to Play**
 
-#### **Sounds**
-- By **Brackeys** and **Asbjørn Thirslund**
+1. Start the game in Unity Play mode.
+2. Survive each round by avoiding or defeating zombies.
+3. Progress to higher rounds as you eliminate all zombies in the current wave.
+4. The game ends when the player is defeated.
 
-#### **Music**
-- By **Brackeys** and **Sofia Thirslund**
+---
 
-#### **Fonts**
-- **Pixel Operator** by [Jayvee Enaguas - HarvettFox96](https://www.dafont.com/pixel-operator.font?l[]=10&l[]=1)
+## **Assets and Credits**
+
+- **3D Models, Sounds, and Textures:** Sourced from free Unity Asset Store packages and open-source resources. See in-project asset folders for specific licenses and attributions.
+- **Scripts:** Custom scripts for zombie spawning, round management, and gameplay logic.
 
 ---
 
 ## **Contributors**
 
-- **Leonardo Spilere**
-- **Jhonny Mezzari**
-- **Felipe Trevisani**
+- Leonardo Spilere
+- Jhonny Mezzari
+- Felipe Trevisani
 
 ---
 
 ## **About the Project**
 
-This project was developed as part of the **Tópicos Especiais** game development class. The objective was to create a small 3D platformer game that incorporates the following:
+This project demonstrates core Unity concepts such as coroutines, object pooling, enemy AI, and round-based progression. It is intended as a learning exercise in 3D game development, scripting, and gameplay systems design.
 
-- **Two Levels:** The game includes two distinct levels, each with unique challenges and layouts.
-- **Health and Death System:** The player has a health system that decreases upon taking damage. If health reaches zero, the player dies, triggering a death screen.
-- **Collectables:** The game features collectable items (e.g., coins) that the player can gather to increase their score.
-- **Player Movement:** The player can move, jump, and perform special actions like rolling, which temporarily disables collisions and adds dynamic movement.
-- **Enemy Interactions:** Enemies patrol the levels, and the player can defeat them by jumping on them or avoiding them to prevent damage.
-- **Camera System:** A camera follows the player to ensure smooth gameplay and visibility of the level.
+Feel free to use, modify, and expand upon this project for your own learning or prototyping purposes.
 
-This project demonstrates the application of fundamental game development concepts, including physics, animations, UI management, and scripting in Unity. It serves as a practical exercise in creating a complete, functional game with multiple mechanics and systems.
-
----
