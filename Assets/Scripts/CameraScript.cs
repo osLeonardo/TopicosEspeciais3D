@@ -17,8 +17,8 @@ public class CameraScript : MonoBehaviour
     private void Update()
     {
         if (!player) return;
-        var mouseX = Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
-        var mouseY = Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;
+        var mouseX = Input.GetAxis($"Mouse X") * sensitivity * Time.deltaTime;
+        var mouseY = Input.GetAxis($"Mouse Y") * sensitivity * Time.deltaTime;
 
         _yRotation += mouseX;
         _xRotation = Mathf.Clamp(_xRotation - mouseY, -85f, 85f);

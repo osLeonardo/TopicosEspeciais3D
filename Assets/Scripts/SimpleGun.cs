@@ -18,6 +18,7 @@ public class SimpleGun : MonoBehaviour
     private int _reserveAmmo;
     private GameController _gameController;
 
+    private static readonly int ReloadTrigger = Animator.StringToHash("Reload");
     private static readonly int ShootTrigger = Animator.StringToHash("Shoot");
     private bool _canShoot = true;
 
@@ -33,7 +34,7 @@ public class SimpleGun : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0) && _canShoot) Shoot();
 
-        if (Input.GetKeyDown(KeyCode.R)) Reload();
+        if (Input.GetKeyDown(KeyCode.R) && _canShoot) Reload();
     }
 
     private void Shoot()
@@ -62,6 +63,8 @@ public class SimpleGun : MonoBehaviour
         var needed = maxClipSize - _currentAmmo;
         if (needed <= 0 || _reserveAmmo <= 0) return;
 
+        _canShoot = false;
+        animator.SetTrigger(ReloadTrigger);
         reloadAudioSource.Play();
         if (_reserveAmmo >= needed)
         {

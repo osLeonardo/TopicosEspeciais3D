@@ -10,8 +10,8 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        var x = Input.GetAxis("Horizontal");
-        var z = Input.GetAxis("Vertical");
+        var x = Input.GetAxis($"Horizontal");
+        var z = Input.GetAxis($"Vertical");
 
         var movement = (transform.forward * z + transform.right * x) * speed;
         if (!_rb) return;
