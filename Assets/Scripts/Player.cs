@@ -4,7 +4,6 @@ public class Player : MonoBehaviour
 {
     public float speed = 5f;
     public float jumpForce = 5f;
-    public Camera cameraScript;
 
     private bool _isOnGround;
     private Rigidbody _rb;
@@ -18,22 +17,18 @@ public class Player : MonoBehaviour
     {
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
-        
-        float cameraYRotation = cameraScript.GetCameraYRotation();
-        transform.rotation = Quaternion.Euler(0, cameraYRotation, 0);
 
-        Vector3 movement = transform.forward * z + transform.right * x;
-        transform.Translate(movement * (speed * Time.deltaTime), Space.World);
-        
+        Vector3 movement = (transform.forward * z + transform.right * x) * speed;
+        if (_rb)
+        {
+            Vector3 velocity = new Vector3(movement.x, _rb.linearVelocity.y, movement.z);
+            _rb.linearVelocity = velocity;
+        }
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Jump();
         }
-    }
-
-    private float GetMovement(float input)
-    {
-        return input * speed * Time.deltaTime;
     }
 
     private void Jump()

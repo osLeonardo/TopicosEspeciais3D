@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+guid: 1b7de0d27a101354ca50592fdb106705
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - ammoPickupPrefab: {fileID: 8468310118008751720, guid: a9eeb32629240b44ab8fe4e8214d9a7f, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -6,11 +6,12 @@ TagManager:
   tags:
   - Enemy
   - Ground
+  - ZombieHead
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Enemy
   - Water
   - UI
   - 
