@@ -1,11 +1,13 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
-    public float speed = 0.5f;
     public float attackCooldown = 1.0f;
-    private float _lastAttackTime = -999f;
+    public AudioSource audioSource;
 
+    private float _lastAttackTime = -999f;
+    private NavMeshAgent _navMeshAgent;
     private GameController _gameController;
     private GameObject _player;
 
@@ -13,14 +15,13 @@ public class Enemy : MonoBehaviour
     {
         _gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         _player = GameObject.FindGameObjectWithTag("Player");
+        _navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
     private void Update()
     {
         var playerPosition = _player.transform.position;
-
-        transform.position = Vector3.MoveTowards(transform.position, playerPosition, speed * Time.deltaTime);
-        transform.LookAt(playerPosition);
+        _navMeshAgent.SetDestination(playerPosition);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -29,6 +30,7 @@ public class Enemy : MonoBehaviour
         {
             if (Time.time - _lastAttackTime >= attackCooldown)
             {
+                audioSource.Play();
                 _gameController.playerLife--;
                 _lastAttackTime = Time.time;
                 if (_gameController.playerLife <= 0)

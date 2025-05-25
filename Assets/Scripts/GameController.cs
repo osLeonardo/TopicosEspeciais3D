@@ -1,4 +1,3 @@
-using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -7,39 +6,38 @@ public class GameController : MonoBehaviour
 {
     public int playerLife = 3;
     public int maxLife = 3;
+    public int currentRound = 1;
     public TextMeshProUGUI lifeCounter;
     public TextMeshProUGUI ammoCounter;
     public TextMeshProUGUI roundCounter;
+    public DeathSequence deathSequence;
+    public AudioSource upgradeAudioSource;
+    public AudioSource regenAudioSource;
+    public AudioSource roundStartAudioSource;
+    
+    public static GameController Instance { get; private set; }
+    public static int LastRound { get; private set; }
 
-    private void Update()
+    public void UpgradeMaxLife()
     {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            DoubleMaxLife();
-        }
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            ResetMaxLife();
-        }
-    }
-
-    public void DoubleMaxLife()
-    {
-        maxLife *= 2;
+        upgradeAudioSource.Play();
+        maxLife += 1;
         lifeCounter.text = $"{playerLife} | {maxLife}";
     }
 
-    public void ResetMaxLife()
+    public void RegenLife()
     {
-        maxLife = 3;
+        regenAudioSource.Play();
+        playerLife = maxLife;
         lifeCounter.text = $"{playerLife} | {maxLife}";
     }
 
     public void KillPlayer()
     {
+        LastRound = currentRound;
         playerLife = 0;
         UpdateLife(playerLife);
-        Debug.LogWarning("Morreu");
+        deathSequence.StartDeathSequence();
     }
 
     public void UpdateLife(int life)
@@ -54,6 +52,20 @@ public class GameController : MonoBehaviour
 
     public void UpdateRound(int round)
     {
+        currentRound = round;
+        roundStartAudioSource.Play();
         roundCounter.text = $"Round {round}";
+    }
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 }

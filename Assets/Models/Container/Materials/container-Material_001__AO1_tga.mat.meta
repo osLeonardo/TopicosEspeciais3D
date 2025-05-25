@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 2e9d7eeed6e51d44199da2739cb194af
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 658
+  packageName: Container
+  packageVersion: 4.0
+  assetPath: Assets/Container/Materials/container-Material_001__AO1_tga.mat
+  uploadId: 25912

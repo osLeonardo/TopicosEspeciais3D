@@ -6,6 +6,8 @@ public class SimpleGun : MonoBehaviour
     public Transform firePoint;
     public Animator animator;
     public LayerMask hitMask;
+    public AudioSource fireAudioSource;
+    public AudioSource reloadAudioSource;
     public float knockbackForce = 10f;
     public float damage = 25f;
     public float range = 100f;
@@ -46,14 +48,16 @@ public class SimpleGun : MonoBehaviour
         _gameController.UpdateAmmo(_currentAmmo, _reserveAmmo);
         _canShoot = false;
         animator.SetTrigger(ShootTrigger);
+        fireAudioSource.Play();
         Ray ray = fpsCam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, range, hitMask))
         {
-            var zombie = hit.collider.GetComponent<ZombieHealth>();
+            var zombie = hit.collider.GetComponentInParent<ZombieHealth>();
             if (zombie)
             {
-                zombie.TakeDamage(damage);
+                bool isHeadshot = hit.collider.CompareTag("ZombieHead");
+                zombie.TakeDamage(damage, isHeadshot);
                 zombie.ApplyKnockback((hit.point - firePoint.position).normalized, knockbackForce);
             }
         }
@@ -64,6 +68,7 @@ public class SimpleGun : MonoBehaviour
         int needed = maxClipSize - _currentAmmo;
         if (needed > 0 && _reserveAmmo > 0)
         {
+            reloadAudioSource.Play();
             if (_reserveAmmo >= needed)
             {
                 _currentAmmo += needed;
@@ -76,6 +81,14 @@ public class SimpleGun : MonoBehaviour
             }
             _gameController.UpdateAmmo(_currentAmmo, _reserveAmmo);
         }
+    }
+    
+    public void RefillAmmo()
+    {
+        reloadAudioSource.Play();
+        _currentAmmo = maxClipSize;
+        _reserveAmmo = maxReserveAmmo;
+        _gameController.UpdateAmmo(_currentAmmo, _reserveAmmo);
     }
 
     public void OnShootAnimationEnd()
