@@ -26,22 +26,19 @@ public class Enemy : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (!collision.gameObject.CompareTag("Player")) return;
+        if (!(Time.time - _lastAttackTime >= attackCooldown)) return;
+
+        audioSource.Play();
+        _gameController.playerLife--;
+        _lastAttackTime = Time.time;
+        if (_gameController.playerLife <= 0)
         {
-            if (Time.time - _lastAttackTime >= attackCooldown)
-            {
-                audioSource.Play();
-                _gameController.playerLife--;
-                _lastAttackTime = Time.time;
-                if (_gameController.playerLife <= 0)
-                {
-                    _gameController.KillPlayer();
-                }
-                else
-                {
-                    _gameController.UpdateLife(_gameController.playerLife);
-                }
-            }
+            _gameController.KillPlayer();
+        }
+        else
+        {
+            _gameController.UpdateLife(_gameController.playerLife);
         }
     }
 }

@@ -44,43 +44,42 @@ public class SimpleGun : MonoBehaviour
     private void Shoot()
     {
         if (_currentAmmo <= 0) return;
+
+        _canShoot = false;
         _currentAmmo--;
         _gameController.UpdateAmmo(_currentAmmo, _reserveAmmo);
-        _canShoot = false;
         animator.SetTrigger(ShootTrigger);
         fireAudioSource.Play();
         Ray ray = fpsCam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, range, hitMask))
-        {
-            var zombie = hit.collider.GetComponentInParent<ZombieHealth>();
-            if (zombie)
-            {
-                bool isHeadshot = hit.collider.CompareTag("ZombieHead");
-                zombie.TakeDamage(damage, isHeadshot);
-                zombie.ApplyKnockback((hit.point - firePoint.position).normalized, knockbackForce);
-            }
-        }
+
+        if (!Physics.Raycast(ray, out hit, range, hitMask)) return;
+
+        var zombie = hit.collider.GetComponentInParent<ZombieHealth>();
+        if (!zombie) return;
+
+        bool isHeadshot = hit.collider.CompareTag("ZombieHead");
+        zombie.TakeDamage(damage, isHeadshot);
+        zombie.ApplyKnockback((hit.point - firePoint.position).normalized, knockbackForce);
     }
 
     private void Reload()
     {
         int needed = maxClipSize - _currentAmmo;
-        if (needed > 0 && _reserveAmmo > 0)
+        if (needed <= 0 || _reserveAmmo <= 0) return;
+
+        reloadAudioSource.Play();
+        if (_reserveAmmo >= needed)
         {
-            reloadAudioSource.Play();
-            if (_reserveAmmo >= needed)
-            {
-                _currentAmmo += needed;
-                _reserveAmmo -= needed;
-            }
-            else
-            {
-                _currentAmmo += _reserveAmmo;
-                _reserveAmmo = 0;
-            }
-            _gameController.UpdateAmmo(_currentAmmo, _reserveAmmo);
+            _currentAmmo += needed;
+            _reserveAmmo -= needed;
         }
+        else
+        {
+            _currentAmmo += _reserveAmmo;
+            _reserveAmmo = 0;
+        }
+        _gameController.UpdateAmmo(_currentAmmo, _reserveAmmo);
     }
     
     public void RefillAmmo()

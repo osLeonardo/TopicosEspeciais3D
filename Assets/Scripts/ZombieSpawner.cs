@@ -16,8 +16,8 @@ public class ZombieSpawner : MonoBehaviour
     private bool _spawning = false;
     private float _roundTimer = 0f;
     private bool _waitingForNextRound = false;
-    private Queue<int> _spawnQueue = new();
     private GameController _gameController;
+    private readonly Queue<int> _spawnQueue = new();
 
     private void Start()
     {
@@ -32,16 +32,15 @@ public class ZombieSpawner : MonoBehaviour
             _waitingForNextRound = true;
             _roundTimer = roundDelay;
         }
-        if (_waitingForNextRound)
-        {
-            _roundTimer -= Time.deltaTime;
-            if (_roundTimer <= 0f)
-            {
-                _currentRound++;
-                StartRound();
-                _waitingForNextRound = false;
-            }
-        }
+
+        if (!_waitingForNextRound) return;
+
+        _roundTimer -= Time.deltaTime;
+        if (!(_roundTimer <= 0f)) return;
+
+        _currentRound++;
+        StartRound();
+        _waitingForNextRound = false;
     }
 
     private void StartRound()
@@ -89,11 +88,10 @@ public class ZombieSpawner : MonoBehaviour
     public void OnZombieKilled()
     {
         _zombiesAlive--;
-        if (_spawnQueue.Count > 0 && !_spawning)
-        {
-            _spawning = true;
-            StartCoroutine(SpawnZombies());
-        }
+        if (_spawnQueue.Count <= 0 || _spawning) return;
+
+        _spawning = true;
+        StartCoroutine(SpawnZombies());
     }
 
     public int GetCurrentRound() => _currentRound;
