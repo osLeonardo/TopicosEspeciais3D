@@ -24,6 +24,7 @@ public class GameController : MonoBehaviour
 
     public void RegenLife()
     {
+        regenAudioSource.Play();
         playerLife = maxLife;
         lifeCounter.text = $"{playerLife} | {maxLife}";
     }
