@@ -8,10 +8,10 @@ public class ZombieHealth : MonoBehaviour
     public GameObject regenLifePickupPrefab;
     public GameObject doubleLifePickupPrefab;
 
-    private readonly int _headshotMultiplier = 10;
-    private float _currentHealth;
     private Rigidbody _rb;
-    private int _dropChance = 100; 
+    private float _currentHealth;
+    private const int DropChance = 100;
+    private const int HeadshotMultiplier = 10;
 
     private void Start()
     {
@@ -28,7 +28,7 @@ public class ZombieHealth : MonoBehaviour
 
     public void TakeDamage(float amount, bool isHeadshot = false)
     {
-        float finalDamage = isHeadshot ? amount * _headshotMultiplier : amount;
+        float finalDamage = isHeadshot ? amount * HeadshotMultiplier : amount;
         _currentHealth -= finalDamage;
         if (_currentHealth <= 0f)
         {
@@ -55,24 +55,28 @@ public class ZombieHealth : MonoBehaviour
 
     private void TryDropPickup()
     {
-        if (Random.Range(0, 100) > _dropChance) return;
+        if (Random.Range(0, 100) > DropChance) return;
         
         int roll = Random.Range(0, 3);
-        GameObject prefabToDrop = null;
-        switch (roll)
+        GameObject prefabToDrop = roll switch
         {
-         case 0:
-             prefabToDrop = ammoPickupPrefab;
-             break;
-         case 1:
-             prefabToDrop = regenLifePickupPrefab;
-             break;
-         case 2:
-             prefabToDrop = doubleLifePickupPrefab;
-             break;
+            0 => ammoPickupPrefab,
+            1 => regenLifePickupPrefab,
+            2 => doubleLifePickupPrefab,
+            _ => null
+        };
+
+        if (prefabToDrop)
+        {
+            Quaternion rotation = prefabToDrop.transform.rotation;
+            Vector3 position = new Vector3(
+                transform.position.x,
+                prefabToDrop.transform.position.y,
+                transform.position.z
+            );
+
+            Instantiate(prefabToDrop, position, rotation);
         }
-        if (prefabToDrop != null)
-            Instantiate(prefabToDrop, transform.position, Quaternion.identity);
     }
 }
 
