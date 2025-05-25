@@ -5,11 +5,14 @@ public class Enemy : MonoBehaviour
 {
     public float attackCooldown = 1.0f;
     public AudioSource audioSource;
+    public Animator animator;
 
     private float _lastAttackTime = -999f;
     private NavMeshAgent _navMeshAgent;
     private GameController _gameController;
     private GameObject _player;
+    private static readonly int AttackTrigger = Animator.StringToHash("Attack");
+    private static readonly int IsFollowing = Animator.StringToHash("IsFollowing");
 
     private void Start()
     {
@@ -22,6 +25,7 @@ public class Enemy : MonoBehaviour
     {
         var playerPosition = _player.transform.position;
         _navMeshAgent.SetDestination(playerPosition);
+        animator.SetBool(IsFollowing, true);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -29,6 +33,7 @@ public class Enemy : MonoBehaviour
         if (!collision.gameObject.CompareTag("Player")) return;
         if (!(Time.time - _lastAttackTime >= attackCooldown)) return;
 
+        animator.SetTrigger(AttackTrigger);
         audioSource.Play();
         _gameController.playerLife--;
         _lastAttackTime = Time.time;

@@ -6,11 +6,13 @@ public class ZombieHealth : MonoBehaviour
     public GameObject ammoPickupPrefab;
     public GameObject regenLifePickupPrefab;
     public GameObject doubleLifePickupPrefab;
+    public Animator animator;
 
     private Rigidbody _rb;
     private float _currentHealth;
     private const int DropChance = 10;
     private const int HeadshotMultiplier = 10;
+    private static readonly int DieTrigger = Animator.StringToHash("Die");
 
     private void Start() => _rb = GetComponent<Rigidbody>();
 
@@ -36,11 +38,22 @@ public class ZombieHealth : MonoBehaviour
 
     private void Die()
     {
+        animator.SetTrigger(DieTrigger);
         TryDropPickup();
-        Destroy(gameObject);
-    
+
+        StartCoroutine(WaitForDeathAnimation());
+    }
+
+    private System.Collections.IEnumerator WaitForDeathAnimation()
+    {
+        var stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+        var waitTime = stateInfo.length;
+
+        yield return new WaitForSeconds(waitTime);
+
         var spawner = FindFirstObjectByType<ZombieSpawner>();
         spawner?.OnZombieKilled();
+        Destroy(gameObject);
     }
 
     private void TryDropPickup()
