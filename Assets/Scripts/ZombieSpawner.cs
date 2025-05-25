@@ -13,9 +13,9 @@ public class ZombieSpawner : MonoBehaviour
     private int _currentRound = 1;
     private int _zombiesToSpawn;
     private int _zombiesAlive;
-    private bool _spawning = false;
-    private float _roundTimer = 0f;
-    private bool _waitingForNextRound = false;
+    private bool _spawning;
+    private float _roundTimer;
+    private bool _waitingForNextRound;
     private GameController _gameController;
     private readonly Queue<int> _spawnQueue = new();
 
@@ -53,7 +53,7 @@ public class ZombieSpawner : MonoBehaviour
         _zombiesToSpawn = _currentRound == 1 ? startZombies : Mathf.CeilToInt(_zombiesToSpawn + _zombiesToSpawn / 2f);
         _spawning = true;
         _spawnQueue.Clear();
-        for (int i = 0; i < _zombiesToSpawn; i++)
+        for (var i = 0; i < _zombiesToSpawn; i++)
         {
             _spawnQueue.Enqueue(1);
         }
@@ -80,7 +80,7 @@ public class ZombieSpawner : MonoBehaviour
 
     private void SpawnZombie()
     {
-        int idx = Random.Range(0, spawnPoints.Count);
+        var idx = Random.Range(0, spawnPoints.Count);
         Instantiate(zombiePrefab, spawnPoints[idx].position, Quaternion.identity);
         _zombiesAlive++;
     }

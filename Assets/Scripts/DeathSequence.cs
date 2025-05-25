@@ -8,17 +8,14 @@ public class DeathSequence : MonoBehaviour
     public float fadeDuration = 2f;
     public string deathSceneName = "DeathScreen";
 
-    public void StartDeathSequence()
-    {
-        StartCoroutine(DeathRoutine());
-    }
+    public void StartDeathSequence() => StartCoroutine(DeathRoutine());
 
     private System.Collections.IEnumerator DeathRoutine()
     {
         Time.timeScale = 0f;
 
-        float elapsed = 0f;
-        Color color = fadeImage.color;
+        var elapsed = 0f;
+        var color = fadeImage.color;
         while (elapsed < fadeDuration)
         {
             elapsed += Time.unscaledDeltaTime;
@@ -27,7 +24,7 @@ public class DeathSequence : MonoBehaviour
             yield return null;
         }
 
-        float wait = 0f;
+        var wait = 0f;
         while (wait < fadeDuration)
         {
             wait += Time.unscaledDeltaTime;

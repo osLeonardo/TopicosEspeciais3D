@@ -6,20 +6,17 @@ public class Player : MonoBehaviour
 
     private Rigidbody _rb;
 
-    private void Start()
-    {
-        _rb = GetComponent<Rigidbody>();
-    }
+    private void Start() => _rb = GetComponent<Rigidbody>();
 
     private void Update()
     {
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
+        var x = Input.GetAxis("Horizontal");
+        var z = Input.GetAxis("Vertical");
 
-        Vector3 movement = (transform.forward * z + transform.right * x) * speed;
+        var movement = (transform.forward * z + transform.right * x) * speed;
         if (!_rb) return;
 
-        Vector3 velocity = new Vector3(movement.x, _rb.linearVelocity.y, movement.z);
+        var velocity = new Vector3(movement.x, _rb.linearVelocity.y, movement.z);
         _rb.linearVelocity = velocity;
     }
 }

@@ -31,14 +31,9 @@ public class SimpleGun : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0) && _canShoot)
-        {
-            Shoot();
-        }
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            Reload();
-        }
+        if (Input.GetMouseButtonDown(0) && _canShoot) Shoot();
+
+        if (Input.GetKeyDown(KeyCode.R)) Reload();
     }
 
     private void Shoot()
@@ -50,22 +45,21 @@ public class SimpleGun : MonoBehaviour
         _gameController.UpdateAmmo(_currentAmmo, _reserveAmmo);
         animator.SetTrigger(ShootTrigger);
         fireAudioSource.Play();
-        Ray ray = fpsCam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
-        RaycastHit hit;
+        var ray = fpsCam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
 
-        if (!Physics.Raycast(ray, out hit, range, hitMask)) return;
+        if (!Physics.Raycast(ray, out var hit, range, hitMask)) return;
 
         var zombie = hit.collider.GetComponentInParent<ZombieHealth>();
         if (!zombie) return;
 
-        bool isHeadshot = hit.collider.CompareTag("ZombieHead");
+        var isHeadshot = hit.collider.CompareTag("ZombieHead");
         zombie.TakeDamage(damage, isHeadshot);
         zombie.ApplyKnockback((hit.point - firePoint.position).normalized, knockbackForce);
     }
 
     private void Reload()
     {
-        int needed = maxClipSize - _currentAmmo;
+        var needed = maxClipSize - _currentAmmo;
         if (needed <= 0 || _reserveAmmo <= 0) return;
 
         reloadAudioSource.Play();
@@ -90,8 +84,5 @@ public class SimpleGun : MonoBehaviour
         _gameController.UpdateAmmo(_currentAmmo, _reserveAmmo);
     }
 
-    public void OnShootAnimationEnd()
-    {
-        _canShoot = true;
-    }
+    public void OnShootAnimationEnd() => _canShoot = true;
 }

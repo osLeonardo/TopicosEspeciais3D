@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class ZombieHealth : MonoBehaviour
 {
@@ -13,35 +12,26 @@ public class ZombieHealth : MonoBehaviour
     private const int DropChance = 10;
     private const int HeadshotMultiplier = 10;
 
-    private void Start()
-    {
-        _rb = GetComponent<Rigidbody>();
-    }
+    private void Start() => _rb = GetComponent<Rigidbody>();
 
     private void Awake()
     {
         var spawner = FindFirstObjectByType<ZombieSpawner>();
-        int round = spawner != null ? spawner.GetCurrentRound() : 1;
-        float multiplier = Mathf.Pow(1.05f, round - 1);
+        var round = spawner != null ? spawner.GetCurrentRound() : 1;
+        var multiplier = Mathf.Pow(1.05f, round - 1);
         _currentHealth = Mathf.Ceil(baseHealth * multiplier);
     }
 
     public void TakeDamage(float amount, bool isHeadshot = false)
     {
-        float finalDamage = isHeadshot ? amount * HeadshotMultiplier : amount;
+        var finalDamage = isHeadshot ? amount * HeadshotMultiplier : amount;
         _currentHealth -= finalDamage;
-        if (_currentHealth <= 0f)
-        {
-            Die();
-        }
+        if (_currentHealth <= 0f) Die();
     }
 
     public void ApplyKnockback(Vector3 direction, float force)
     {
-        if (_rb)
-        {
-            _rb.AddForce(direction * force, ForceMode.Impulse);
-        }
+        if (_rb) _rb.AddForce(direction * force, ForceMode.Impulse);
     }
 
     private void Die()
@@ -56,8 +46,8 @@ public class ZombieHealth : MonoBehaviour
     private void TryDropPickup()
     {
         if (Random.Range(0, 100) > DropChance) return;
-        int roll = Random.Range(0, 3);
-        GameObject prefabToDrop = roll switch
+        var roll = Random.Range(0, 3);
+        var prefabToDrop = roll switch
         {
             0 => ammoPickupPrefab,
             1 => regenLifePickupPrefab,
@@ -65,18 +55,16 @@ public class ZombieHealth : MonoBehaviour
             _ => null
         };
 
+        if (!prefabToDrop) return;
 
-        if (prefabToDrop)
-        {
-            Quaternion rotation = prefabToDrop.transform.rotation;
-            Vector3 position = new Vector3(
-                transform.position.x,
-                prefabToDrop.transform.position.y,
-                transform.position.z
-            );
+        var rotation = prefabToDrop.transform.rotation;
+        var position = new Vector3(
+            transform.position.x,
+            prefabToDrop.transform.position.y,
+            transform.position.z
+        );
 
-            Instantiate(prefabToDrop, position, rotation);
-        }
+        Instantiate(prefabToDrop, position, rotation);
     }
 }
 

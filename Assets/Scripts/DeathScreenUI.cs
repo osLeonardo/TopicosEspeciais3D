@@ -13,13 +13,7 @@ public class DeathScreenUI : MonoBehaviour
         roundsText.text = $"You survived {GameController.LastRound} rounds";
     }
 
-    public void OnRestart()
-    {
-        SceneManager.LoadScene("SampleScene");
-    }
+    public void OnRestart() => SceneManager.LoadScene("SampleScene");
 
-    public void OnQuit()
-    {
-        Application.Quit();
-    }
+    public void OnQuit() => Application.Quit();
 }

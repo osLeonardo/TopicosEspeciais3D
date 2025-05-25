@@ -1,6 +1,5 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class GameController : MonoBehaviour
 {
@@ -17,6 +16,18 @@ public class GameController : MonoBehaviour
     
     public static GameController Instance { get; private set; }
     public static int LastRound { get; private set; }
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     public void UpgradeMaxLife()
     {
@@ -40,16 +51,6 @@ public class GameController : MonoBehaviour
         deathSequence.StartDeathSequence();
     }
 
-    public void UpdateLife(int life)
-    {
-        lifeCounter.text = $"{life} | {maxLife}";
-    }
-
-    public void UpdateAmmo(int current, int max)
-    {
-        ammoCounter.text = $"{current} | {max}";
-    }
-
     public void UpdateRound(int round)
     {
         currentRound = round;
@@ -57,15 +58,7 @@ public class GameController : MonoBehaviour
         roundCounter.text = $"Round {round}";
     }
 
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
+    public void UpdateLife(int life) => lifeCounter.text = $"{life} | {maxLife}";
+
+    public void UpdateAmmo(int current, int max) => ammoCounter.text = $"{current} | {max}";
 }
