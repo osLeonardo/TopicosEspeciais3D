@@ -56,7 +56,6 @@ public class ZombieHealth : MonoBehaviour
     private void TryDropPickup()
     {
         if (Random.Range(0, 100) > DropChance) return;
-        
         int roll = Random.Range(0, 3);
         GameObject prefabToDrop = roll switch
         {
@@ -65,6 +64,7 @@ public class ZombieHealth : MonoBehaviour
             2 => doubleLifePickupPrefab,
             _ => null
         };
+
 
         if (prefabToDrop)
         {

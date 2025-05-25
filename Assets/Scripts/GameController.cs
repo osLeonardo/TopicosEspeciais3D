@@ -11,9 +11,13 @@ public class GameController : MonoBehaviour
     public TextMeshProUGUI ammoCounter;
     public TextMeshProUGUI roundCounter;
     public static GameController Instance { get; private set; }
+    public AudioSource doubleAudioSource;
+    public AudioSource regenAudioSource;
+    public AudioSource roundStartAudioSource;
 
     public void DoubleMaxLife()
     {
+        doubleAudioSource.Play();
         maxLife *= 2;
         lifeCounter.text = $"{playerLife} | {maxLife}";
     }
@@ -43,6 +47,7 @@ public class GameController : MonoBehaviour
 
     public void UpdateRound(int round)
     {
+        roundStartAudioSource.Play();
         roundCounter.text = $"Round {round}";
     }
     private void Awake()

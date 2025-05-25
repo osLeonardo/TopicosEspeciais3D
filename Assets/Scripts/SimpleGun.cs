@@ -65,11 +65,10 @@ public class SimpleGun : MonoBehaviour
 
     private void Reload()
     {
-        reloadAudioSource.Play();
         int needed = maxClipSize - _currentAmmo;
         if (needed > 0 && _reserveAmmo > 0)
         {
-            
+            reloadAudioSource.Play();
             if (_reserveAmmo >= needed)
             {
                 _currentAmmo += needed;
@@ -86,6 +85,7 @@ public class SimpleGun : MonoBehaviour
     
     public void RefillAmmo()
     {
+        reloadAudioSource.Play();
         _currentAmmo = maxClipSize;
         _reserveAmmo = maxReserveAmmo;
         _gameController.UpdateAmmo(_currentAmmo, _reserveAmmo);
