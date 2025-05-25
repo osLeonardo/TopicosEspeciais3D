@@ -78,6 +78,13 @@ public class SimpleGun : MonoBehaviour
             _gameController.UpdateAmmo(_currentAmmo, _reserveAmmo);
         }
     }
+    
+    public void RefillAmmo()
+    {
+        _currentAmmo = maxClipSize;
+        _reserveAmmo = maxReserveAmmo;
+        _gameController.UpdateAmmo(_currentAmmo, _reserveAmmo);
+    }
 
     public void OnShootAnimationEnd()
     {

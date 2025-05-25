@@ -399,7 +399,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseHealth: 75
-  headshotMultiplier: 3
+  ammoPickupPrefab: {fileID: 4510679504737037895, guid: 63c3f1d8503da8345a316d0ced77af48, type: 3}
+  regenLifePickupPrefab: {fileID: 8829813412002580172, guid: 53f0552a7bb0c124c8056c4ee5158333, type: 3}
+  doubleLifePickupPrefab: {fileID: 2258255215712663828, guid: d7bac569277f4f142bcc86a176b6af8f, type: 3}
 --- !u!111 &-16424335998849346
 Animation:
   m_ObjectHideFlags: 0

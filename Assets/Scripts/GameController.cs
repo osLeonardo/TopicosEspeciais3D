@@ -10,18 +10,7 @@ public class GameController : MonoBehaviour
     public TextMeshProUGUI lifeCounter;
     public TextMeshProUGUI ammoCounter;
     public TextMeshProUGUI roundCounter;
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            DoubleMaxLife();
-        }
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            ResetMaxLife();
-        }
-    }
+    public static GameController Instance { get; private set; }
 
     public void DoubleMaxLife()
     {
@@ -29,9 +18,9 @@ public class GameController : MonoBehaviour
         lifeCounter.text = $"{playerLife} | {maxLife}";
     }
 
-    public void ResetMaxLife()
+    public void RegenLife()
     {
-        maxLife = 3;
+        playerLife = maxLife;
         lifeCounter.text = $"{playerLife} | {maxLife}";
     }
 
@@ -55,5 +44,15 @@ public class GameController : MonoBehaviour
     public void UpdateRound(int round)
     {
         roundCounter.text = $"Round {round}";
+    }
+    private void Awake()
+    {
+        if (Instance == null)
+            Instance = this;
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
     }
 }

@@ -8232,63 +8232,6 @@ PrefabInstance:
       addedObject: {fileID: 1852311725}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 029897822efdb9f48b987e17a030ed11, type: 3}
---- !u!1001 &5234703340704814758
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 915180301854269300, guid: a9eeb32629240b44ab8fe4e8214d9a7f, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -1.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 915180301854269300, guid: a9eeb32629240b44ab8fe4e8214d9a7f, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.17
-      objectReference: {fileID: 0}
-    - target: {fileID: 915180301854269300, guid: a9eeb32629240b44ab8fe4e8214d9a7f, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -17.04
-      objectReference: {fileID: 0}
-    - target: {fileID: 915180301854269300, guid: a9eeb32629240b44ab8fe4e8214d9a7f, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 915180301854269300, guid: a9eeb32629240b44ab8fe4e8214d9a7f, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 915180301854269300, guid: a9eeb32629240b44ab8fe4e8214d9a7f, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 915180301854269300, guid: a9eeb32629240b44ab8fe4e8214d9a7f, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 915180301854269300, guid: a9eeb32629240b44ab8fe4e8214d9a7f, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 915180301854269300, guid: a9eeb32629240b44ab8fe4e8214d9a7f, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 915180301854269300, guid: a9eeb32629240b44ab8fe4e8214d9a7f, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 8468310118008751720, guid: a9eeb32629240b44ab8fe4e8214d9a7f, type: 3}
-      propertyPath: m_Name
-      value: Coin
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: a9eeb32629240b44ab8fe4e8214d9a7f, type: 3}
 --- !u!1001 &6447340993837982313
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8417,7 +8360,6 @@ SceneRoots:
   m_Roots:
   - {fileID: 1673151586}
   - {fileID: 410087041}
-  - {fileID: 5234703340704814758}
   - {fileID: 2750908222897344535}
   - {fileID: 1626081098}
   - {fileID: 123777216}
