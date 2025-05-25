@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class GameController : MonoBehaviour
 {
@@ -10,17 +11,17 @@ public class GameController : MonoBehaviour
     public TextMeshProUGUI ammoCounter;
     public TextMeshProUGUI roundCounter;
     public DeathSequence deathSequence;
-    public AudioSource doubleAudioSource;
+    public AudioSource upgradeAudioSource;
     public AudioSource regenAudioSource;
     public AudioSource roundStartAudioSource;
     
     public static GameController Instance { get; private set; }
     public static int LastRound { get; private set; }
 
-    public void DoubleMaxLife()
+    public void UpgradeMaxLife()
     {
-        doubleAudioSource.Play();
-        maxLife *= 2;
+        upgradeAudioSource.Play();
+        maxLife += 1;
         lifeCounter.text = $"{playerLife} | {maxLife}";
     }
 

@@ -10,7 +10,7 @@ public class ZombieHealth : MonoBehaviour
 
     private Rigidbody _rb;
     private float _currentHealth;
-    private const int DropChance = 100;
+    private const int DropChance = 10;
     private const int HeadshotMultiplier = 10;
 
     private void Start()

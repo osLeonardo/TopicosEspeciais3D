@@ -3,7 +3,6 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
-    public float speed = 2f;
     public float attackCooldown = 1.0f;
     public AudioSource audioSource;
 

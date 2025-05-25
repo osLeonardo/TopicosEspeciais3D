@@ -10,7 +10,6 @@ public class AmmoPickup : MonoBehaviour
             if (gun)
             {
                 gun.RefillAmmo();
-                Debug.Log("Municação restaurada!");
             }
             Destroy(gameObject);
         }
