@@ -6,6 +6,7 @@ public class SimpleGun : MonoBehaviour
     public Transform firePoint;
     public Animator animator;
     public LayerMask hitMask;
+    public AudioSource audioSource;
     public float knockbackForce = 10f;
     public float damage = 25f;
     public float range = 100f;
@@ -46,6 +47,7 @@ public class SimpleGun : MonoBehaviour
         _gameController.UpdateAmmo(_currentAmmo, _reserveAmmo);
         _canShoot = false;
         animator.SetTrigger(ShootTrigger);
+        audioSource.Play();
         Ray ray = fpsCam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, range, hitMask))
