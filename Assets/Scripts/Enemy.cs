@@ -39,15 +39,6 @@ public class Enemy : MonoBehaviour
 
         animator.SetTrigger(AttackTrigger);
         audioSource.Play();
-        StartCoroutine(HandleAttack());
-    }
-
-    private System.Collections.IEnumerator HandleAttack()
-    {
-        var attackState = animator.GetCurrentAnimatorStateInfo(0);
-        var waitTime = attackState.length;
-        yield return new WaitForSeconds(waitTime);
-
         _gameController.playerLife--;
         _lastAttackTime = Time.time;
         if (_gameController.playerLife <= 0)
